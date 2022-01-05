@@ -1,0 +1,18 @@
+﻿@page "/secured"
+@using Microsoft.AspNetCore.Authorization
+@inject HttpClient Http
+@attribute [Authorize(Roles = "admin")]
+
+
+<h1>Azure Function Test</h1>
+
+@code {
+    private string result = "temp value";
+
+    protected override async Task OnInitializedAsync()
+    {
+        //where do i set up the api...
+        var response = await Http.GetStringAsync("/api/secured/HeyYou?name=mememe");
+        result = response.ToString();
+    }
+}
